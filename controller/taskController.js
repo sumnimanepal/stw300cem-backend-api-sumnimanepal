@@ -55,13 +55,13 @@ exports.view = function (req, res) {
 
 // Handle update task info
 exports.update = function (req, res) {
-
-    task.findById(req.params.task_id, function (err, task) {
+    Task.findById(req.params.task_id, function (err, task) {
         if (err)
             res.send(err);
 
-        task.task_name = req.body.task_name ? req.body.task_name : task.task_name;
+        // task.task_name = req.body.task_name ? req.body.task_name : task.task_name;
         task.due_date = req.body.due_date;
+        task.due_time=req.body.due_time;
    
 
         // save the task and check for errors
@@ -80,7 +80,7 @@ exports.update = function (req, res) {
 // Handle delete task
 exports.delete = function (req, res) {
     Task.remove({
-        _id: req.params.task_id
+        task_id: req.params.task_id
     }, function (err, task) {
         if (err)
             res.send(err);
